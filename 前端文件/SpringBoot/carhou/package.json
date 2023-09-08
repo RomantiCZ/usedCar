@@ -1,0 +1,38 @@
+{
+  "name": "carhou",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "serve": "vue-cli-service serve",
+    "build": "vue-cli-service build"
+  },
+  "dependencies": {
+    "@element-plus/icons-vue": "^2.1.0",
+    "@tinymce/tinymce-vue": "^5.1.0",
+    "axios": "^1.4.0",
+    "core-js": "^3.8.3",
+    "echarts": "^5.4.2",
+    "element-plus": "^2.0.0",
+    "http": "^0.0.1-security",
+    "jquery": "^3.7.0",
+    "path-browserify": "^1.0.1",
+    "tinymce": "^5.10.7",
+    "vue": "^3.2.13",
+    "vue-router": "^4.0.3",
+    "vuex": "^4.0.0",
+    "webpack": "^5.84.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "~5.0.0",
+    "@vue/cli-plugin-router": "~5.0.0",
+    "@vue/cli-plugin-vuex": "~5.0.0",
+    "@vue/cli-service": "~5.0.0",
+    "vue-cli-plugin-element-plus": "^0.0.13"
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not dead",
+    "not ie 11"
+  ]
+}
