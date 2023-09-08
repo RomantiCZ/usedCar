@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ikun.carshop.mapper.UserMapper">
+
+    <resultMap id="usedPojo" type="cn.ikun.carshop.pojo.User">
+
+        <id property="userId" column="user_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        <result property="userName" column="username" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="password" column="password" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="name" column="name"  javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="sex" column="sex"  javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="idCard" column="id_card" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="tel" column="tel" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="email" column="email" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="img" column="img" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="status" column="status" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" javaType="java.time.LocalDateTime" />
+        <result property="updateTime" column="update_time" javaType="java.time.LocalDateTime"/>
+        <result property="isDelete" column="is_delete" javaType="java.lang.Integer"/>
+    </resultMap>
+
+    <sql id="UserColumn">
+        user_id,username,password,name,sex,id_card,tel,email,img,status,create_time,update_time
+    </sql>
+
+
+
+    <select id="selectByUserNameAndPassword" resultMap="usedPojo">
+            select user_id,username,password,name,sex,status,email from users where username= #{username}
+    </select>
+
+    <select id="selectSexOrder" resultType="map">
+        select sex as name,count(*) as value
+        from users
+        where sex is not null and is_delete=0
+        group by sex
+        order by sex desc
+    </select>
+
+</mapper>

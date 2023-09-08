@@ -1,0 +1,27 @@
+{
+  "groups": [
+    {
+      "name": "jwtconfig.jwt",
+      "type": "cn.ikun.carshop.utils.JwtConfigUtils",
+      "sourceType": "cn.ikun.carshop.utils.JwtConfigUtils"
+    }
+  ],
+  "properties": [
+    {
+      "name": "jwtconfig.jwt.expire",
+      "type": "java.lang.Long",
+      "sourceType": "cn.ikun.carshop.utils.JwtConfigUtils"
+    },
+    {
+      "name": "jwtconfig.jwt.header",
+      "type": "java.lang.String",
+      "sourceType": "cn.ikun.carshop.utils.JwtConfigUtils"
+    },
+    {
+      "name": "jwtconfig.jwt.secret",
+      "type": "java.lang.String",
+      "sourceType": "cn.ikun.carshop.utils.JwtConfigUtils"
+    }
+  ],
+  "hints": []
+}

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.ikun.carshop.mapper.CarsRentalMapper">
+
+    <resultMap id="carRental" type="cn.ikun.carshop.pojo.CarsRental">
+        <id property="vehicleId" column="vehicle_id" javaType="java.lang.Long" jdbcType="BIGINT"/>
+        <result property="brand" column="brand" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="model" column="model" javaType="java.lang.String" jdbcType="VARCHAR"/>
+        <result property="year" column="year" javaType="java.lang.Integer" jdbcType="BIGINT"/>
+        <result property="mileage" column="mileage" javaType="java.math.BigDecimal"/>
+        <result property="img" column="img" javaType="java.lang.String"/>
+        <result property="description" column="description" javaType="java.lang.String"/>
+        <result property="rentalPrice" column="rental_price" javaType="java.math.BigDecimal"/>
+        <result property="status" column="status" javaType="java.lang.Integer" jdbcType="INTEGER"/>
+        <result property="createTime" column="create_time" javaType="java.time.LocalDateTime"/>
+        <result property="updateTime" column="update_time" javaType="java.time.LocalDateTime"/>
+        <result property="createAdmins" column="create_admins" javaType="java.lang.Long"/>
+        <result property="updateAdmins" column="update_admins" javaType="java.lang.Long"/>
+        <result property="isDelete" column="is_delete" javaType="java.lang.Integer"/>
+
+    </resultMap>
+
+    <sql id="carRentalCol">
+        vehicle_id
+        ,brand,model,year,mileage,rental_price,img
+    </sql>
+
+
+    <select id="selectAllBrand" resultType="map">
+        select brand as name, count(*) as value
+        from cars_rental
+        where brand is not null  and is_delete=0
+        GROUP BY brand
+        order by brand desc
+    </select>
+
+    <select id="selectAllYear" resultType="map">
+        select year as name, count(*) as value
+        from cars_rental
+        where year is not null  and is_delete=0
+        group by year
+        order by year desc
+    </select>
+
+    <select id="selectOrderByUpdateTime" resultMap="carRental">
+        select
+        <include refid="carRentalCol"/>
+        from cars_rental
+        where status =0  and is_delete=0 and status = 0
+        order by update_time desc
+        limit 3
+    </select>
+
+
+</mapper>

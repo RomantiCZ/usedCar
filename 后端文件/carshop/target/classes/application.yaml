@@ -1,0 +1,107 @@
+server:
+  port: 8888
+
+
+spring:
+  application:
+    name: carshop
+  # 数据源
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/carshop?useSSL=false&characterEncoding=utf8&serverTimezone=GMT%2B8
+    username: root
+    password: 123456
+
+    # Druid 连接池相关配置
+    druid:
+      initial-size: 5  #连接池初始化时创建的连接数。
+      min-idle: 5      #连接池中保持最小空闲连接的数量
+      max-active: 20   #连接池中同时可激活的最大连接数
+      max-wait: 60000  #应用程序从连接池中获取连接时的最大等待时间
+      validation-query: SELECT 1 FROM DUAL #用于测试连接是否有效的查询语句，在每次获取连接时都会执行
+      test-on-borrow: true  #在获取连接时检查连接的有效性
+      test-while-idle: true #定期检查连接的有效性
+      time-between-eviction-runs-millis: 60000 #定期清理无效连接的时间间隔
+      min-evictable-idle-time-millis: 300000   #连接池中连接最小的空闲时间
+      pool-prepared-statements: true           #启用或禁用 PSCache 功能
+      max-pool-prepared-statement-per-connection-size: 20 #单个连接上 PSCache 的大小
+      filters: stat,wall,log4j2                #Druid 连接池的扩展插件列表
+      connection-properties: druid.stat.mergeSql\=true;druid.stat.slowSqlMillis\=5000
+      # Druid 监控统计模块开启
+      stat-view-servlet:
+        enabled: true
+        url-pattern: /druid/*
+        login-username: admin
+        login-password: 123456
+  #配置图片上传
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 100MB
+      max-request-size: 100MB
+  #邮箱配置
+  mail:
+    host: smtp.qq.com #邮件服务器地址
+    port: 587
+    username: 1643849825@qq.com
+    password: hesqhambmdfedjee #密码
+    default-encoding: UTF-8
+    #其他参数
+    properties:
+      mail:
+        #配置SSL 加密工厂
+        smtp:
+          ssl:
+            #本地测试，先放开ssl
+            enable: false
+            required: false
+            #开启debug模式，这样邮件发送过程的日志会在控制台打印出来，方便排查错误
+      debug: true
+
+
+
+  #redis的配置
+  redis:
+    host: 192.168.83.133
+    port: 6379
+    lettuce:
+      pool:
+        max-idle: 8
+        max-wait: 2ms
+        min-idle: 3
+        max-active: 8
+
+
+
+mybatis-plus:
+  configuration:
+    #在映射实体或者属性时，将数据库中表名和字段名中的下划线去掉，按照驼峰命名法映射
+    map-underscore-to-camel-case: true
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    cache-enabled: true
+
+
+  global-config:
+    db-config:
+      id-type: assign_id
+      logic-delete-value: 1 # 逻辑已删除值(默认为 1)
+      logic-not-delete-value: 0 # 逻辑未删除值(默认为 0)
+
+  mapper-locations: classpath*:/mapper/**/*.xml,classpath*:/mapper/*.xml,classpath:/mapper/*.xml,classpath:/mapper/**/*.xml
+
+
+
+
+carshop:
+  salt: "m1y2s3a4l5t6i7k8u9n"
+  photopath: F:\project\img\
+
+jwtconfig:
+  jwt:
+    #加密的密钥
+    secret: "k1u4n7k2u58n3i6l9o1v2e3you"
+    # token有效时长
+    expire: 1800
+    # header 名称
+    header: jwtToken
